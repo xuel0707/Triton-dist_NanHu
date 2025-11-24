@@ -1,0 +1,72 @@
+# Pytest
+pytest.ini
+
+# Python caches
+__pycache__/
+*.py[cod]
+.pytest_cache
+
+# Environments
+.venv
+venv/
+venv.bak/
+
+# VS Code project files
+.vscode
+.vs
+
+# JetBrains project files
+.idea
+cmake-build-*
+
+# clangd index. (".clangd" is a config file now, thus trailing slash)
+.clangd/
+.cache
+/compile_commands.json
+
+# Vim
+*.swp
+
+# macOS
+.DS_Store
+
+# .triton and cache
+.triton
+.triton_cache
+triton_cache/*
+
+# log files
+trace*.log
+prof
+
+# distributed
+triton_aot_generated
+rank-*.log
+python/*.egg-info
+shmem/rocshmem_build
+shmem/rocshmem_bind/pyrocshmem/.eggs/*
+shmem/rocshmem_bind/runtime/*.o
+shmem/rocshmem_bind/rocshmem_build
+shmem/rocshmem_bind/ompi_build
+shmem/rocshmem_bind/pyrocshmem/build/
+shmem/rocshmem_bind/pyrocshmem/python/*.egg-info
+shmem/rocshmem_bind/pyrocshmem/dist
+
+build
+python/triton_dist/_C/*.so
+python/triton_dist/*nvshmem
+python/triton_dist/_C/*nvshmem
+
+hf_configs*
+*.whl
+
+# conflicts
+temp_conflicts
+temp_merge_repo
+conflict_list.txt
+
+dev_output/
+
+# cibuildwheel temp
+wheelhouse/
+setup.cfg
