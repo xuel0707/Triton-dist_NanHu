@@ -48,18 +48,18 @@ import numpy as np
 import torch
 import triton
 import triton.language as tl
-import nhTriton_dist.language as dl
+import triton_dist.language as dl
 
 from hip import hip
 from typing import Optional, List
 import pyrocshmem
-from nhTriton_dist.utils import (
+from triton_dist.utils import (
     HIP_CHECK,
     generate_data,
     dist_print,
 )
-from nhTriton_dist.kernels.amd import create_ag_gemm_intra_node_context
-from nhTriton_dist.kernels.amd.common_ops import barrier_all_on_stream
+from triton_dist.kernels.amd import create_ag_gemm_intra_node_context
+from triton_dist.kernels.amd.common_ops import barrier_all_on_stream
 
 assert triton.runtime.driver.active.get_current_target().backend == "hip"
 

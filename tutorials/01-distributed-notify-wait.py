@@ -53,13 +53,13 @@ import torch
 import nvshmem.core
 
 import triton.language as tl
-import nhTriton_dist.language as dl
-from nhTriton_dist.utils import NVSHMEM_SIGNAL_DTYPE, dist_print, initialize_distributed, nvshmem_barrier_all_on_stream, nvshmem_free_tensor_sync, nvshmem_create_tensor
-from nhTriton_dist.language.extra.language_extra import __syncthreads
-import nhTriton_dist
+import triton_dist.language as dl
+from triton_dist.utils import NVSHMEM_SIGNAL_DTYPE, dist_print, initialize_distributed, nvshmem_barrier_all_on_stream, nvshmem_free_tensor_sync, nvshmem_create_tensor
+from triton_dist.language.extra.language_extra import __syncthreads
+import triton_dist
 
 
-@nhTriton_dist.jit
+@triton_dist.jit
 def producer_consumer_kernel(
     rank: tl.constexpr,
     num_ranks: tl.constexpr,

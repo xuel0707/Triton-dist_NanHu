@@ -49,10 +49,10 @@ import nvshmem.core
 import torch
 from cuda import cuda
 
-import nhTriton_dist
+import triton_dist
 import triton.language as tl
-from nhTriton_dist.language.extra import libshmem_device
-from nhTriton_dist.utils import (CUDA_CHECK, dist_print, initialize_distributed,
+from triton_dist.language.extra import libshmem_device
+from triton_dist.utils import (CUDA_CHECK, dist_print, initialize_distributed,
                                nvshmem_barrier_all_on_stream,
                                NVSHMEM_SIGNAL_DTYPE, nvshmem_create_tensors,
                                nvshmem_free_tensor_sync)
@@ -104,7 +104,7 @@ def cp_engine_producer_all_gather_full_mesh_pull(
 # We can also use NVSHMEM device function (libshmem_device) to get/put data.
 
 
-@nhTriton_dist.jit
+@triton_dist.jit
 def nvshmem_device_producer_all_gather_2d_put_block_kernel(
     remote_tensor_ptr,
     signal_buffer_ptr,

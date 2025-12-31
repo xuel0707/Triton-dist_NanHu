@@ -49,12 +49,12 @@ import triton.language as tl
 
 from typing import Optional
 import pyrocshmem
-from nhTriton_dist.utils import (
+from triton_dist.utils import (
     generate_data,
     dist_print,
 )
-from nhTriton_dist.kernels.amd import create_gemm_rs_intra_node_context
-from nhTriton_dist.kernels.amd.common_ops import barrier_all_on_stream
+from triton_dist.kernels.amd import create_gemm_rs_intra_node_context
+from triton_dist.kernels.amd.common_ops import barrier_all_on_stream
 
 assert triton.runtime.driver.active.get_current_target().backend == "hip"
 

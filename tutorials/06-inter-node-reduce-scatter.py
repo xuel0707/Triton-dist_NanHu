@@ -39,16 +39,16 @@ import torch
 import dataclasses
 import triton
 import triton.language as tl
-import nhTriton_dist.language as dl
+import triton_dist.language as dl
 
 from typing import Optional, List
 import nvshmem.core
-import nhTriton_dist
-from nhTriton_dist.kernels.common_ops import wait_eq
-from nhTriton_dist.kernels.nvidia.common_ops import BarrierAllContext, barrier_all_on_stream
-from nhTriton_dist.kernels.nvidia.reduce_scatter import ring_reduce
-from nhTriton_dist.language.extra import libshmem_device
-from nhTriton_dist.utils import initialize_distributed, nvshmem_barrier_all_on_stream, NVSHMEM_SIGNAL_DTYPE, nvshmem_create_tensors, nvshmem_free_tensor_sync
+import triton_dist
+from triton_dist.kernels.common_ops import wait_eq
+from triton_dist.kernels.nvidia.common_ops import BarrierAllContext, barrier_all_on_stream
+from triton_dist.kernels.nvidia.reduce_scatter import ring_reduce
+from triton_dist.language.extra import libshmem_device
+from triton_dist.utils import initialize_distributed, nvshmem_barrier_all_on_stream, NVSHMEM_SIGNAL_DTYPE, nvshmem_create_tensors, nvshmem_free_tensor_sync
 
 import os
 
@@ -230,7 +230,7 @@ def create_reduce_scater_2d_ctx(
 
 
 ################### triton kernel ###################
-@nhTriton_dist.jit
+@triton_dist.jit
 def kernel_inter_node_p2p_for_same_local_rank(
         offset,
         local_world_size,

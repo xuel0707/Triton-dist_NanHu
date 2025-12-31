@@ -48,10 +48,10 @@ import torch
 
 import triton
 import triton.language as tl
-import nhTriton_dist
-from nhTriton_dist.kernels.nvidia.common_ops import \
+import triton_dist
+from triton_dist.kernels.nvidia.common_ops import \
     barrier_all_intra_node_atomic_cas_block
-from nhTriton_dist.utils import (nvshmem_barrier_all_on_stream,
+from triton_dist.utils import (nvshmem_barrier_all_on_stream,
                                nvshmem_create_tensor, nvshmem_create_tensors,
                                nvshmem_free_tensor_sync,
                                requires_p2p_native_atomic,
@@ -246,7 +246,7 @@ if __name__ == "__main__":
     LOCAL_RANK = int(os.environ.get("LOCAL_RANK", 0))
     WORLD_SIZE = int(os.environ.get("WORLD_SIZE", 1))
     LOCAL_WORLD_SIZE = int(os.environ.get("LOCAL_WORLD_SIZE", 1))
-    TP_GROUP = nhTriton_dist.utils.initialize_distributed()
+    TP_GROUP = triton_dist.utils.initialize_distributed()
     torch.cuda.synchronize()
 
     assert LOCAL_WORLD_SIZE == WORLD_SIZE, "runs on 1 node expected."

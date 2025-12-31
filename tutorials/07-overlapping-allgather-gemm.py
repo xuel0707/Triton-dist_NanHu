@@ -49,12 +49,12 @@ from cuda import cudart
 
 import triton
 import triton.language as tl
-import nhTriton_dist
-import nhTriton_dist.language as dl
-from nhTriton_dist.kernels.common_ops import set_signal, wait_eq
-from nhTriton_dist.kernels.nvidia.allgather_gemm import create_ag_gemm_context
-from nhTriton_dist.language.extra import libshmem_device
-from nhTriton_dist.utils import initialize_distributed, nvshmem_barrier_all_on_stream
+import triton_dist
+import triton_dist.language as dl
+from triton_dist.kernels.common_ops import set_signal, wait_eq
+from triton_dist.kernels.nvidia.allgather_gemm import create_ag_gemm_context
+from triton_dist.language.extra import libshmem_device
+from triton_dist.utils import initialize_distributed, nvshmem_barrier_all_on_stream
 
 # %%
 # Now, let's write a GEMM kernel to consume the transfered tensors!
@@ -266,7 +266,7 @@ def inter_node_allgather(local_tensor: torch.Tensor,
 # Let's declare a function to perform internode communication.
 
 
-@nhTriton_dist.jit
+@triton_dist.jit
 def nvshmem_device_producer_p2p_put_block_kernel(
     ag_buffer_ptr,  # *Pointer* to allgather output vector. The rank-th index has been loaded with local tensor
     signal_buffer_ptr,  # *Pointer* to signal barrier.
@@ -489,7 +489,7 @@ if __name__ == "__main__":
 
     # We can use a context to wrap all the tensors used at runtime.
     # We rely on NVSHMEM to allocate the symmetric memory for communication
-    # In practice, the following parts are encapsulated in ag_gemm_inter_node() of nhTriton_dist.kernels.nvidia.allgather_gemm.py
+    # In practice, the following parts are encapsulated in ag_gemm_inter_node() of triton_dist.kernels.nvidia.allgather_gemm.py
 
     C = torch.empty([M, N_per_rank], dtype=dtype, device="cuda")
     ctx = create_ag_gemm_context(A,

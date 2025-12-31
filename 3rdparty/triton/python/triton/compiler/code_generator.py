@@ -23,7 +23,7 @@ from .._utils import find_paths_if, get_iterable_path, set_iterable_path
 
 from .errors import (CompilationError, CompileTimeAssertionFailure, UnsupportedLanguageConstruct)
 
-import nhTriton_dist
+import triton_dist
 import builtins
 
 
@@ -940,7 +940,7 @@ class CodeGenerator(ast.NodeVisitor):
         thread_id = language.core.tensor(self.builder.create_get_thread_id(), language.core.int32)
         block_size = language.core.tensor(self.builder.create_get_block_size(), language.core.int32)
 
-        if withitemClass == nhTriton_dist.language.simt_exec_region:
+        if withitemClass == triton_dist.language.simt_exec_region:
             self.set_value(node.items[0].optional_vars.elts[0].id, thread_id)
             self.set_value(node.items[0].optional_vars.elts[1].id, block_size)
             with enter_sub_region(self) as sr:
@@ -1097,7 +1097,7 @@ class CodeGenerator(ast.NodeVisitor):
                 if isinstance(sl, constexpr) and sl.value is None:
                     is_extract = False
             if is_extract:
-                return nhTriton_dist.language.extract(lhs, slices, self.semantic)
+                return triton_dist.language.extract(lhs, slices, self.semantic)
             return lhs.__getitem__(slices, _semantic=self.semantic)
         return lhs[slices]
 
@@ -1107,7 +1107,7 @@ class CodeGenerator(ast.NodeVisitor):
         slices = self.visit(node.slice)
         # Extension of dist triton: store value to tile
         if _is_triton_tensor(lhs):
-            ret = nhTriton_dist.language.insert(lhs, value, slices, self.semantic)
+            ret = triton_dist.language.insert(lhs, value, slices, self.semantic)
             self.set_value(node.value.id, ret)
             return
         assert isinstance(lhs, language.tuple)

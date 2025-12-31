@@ -876,21 +876,21 @@ def get_packages():
         _packages += ["triton/profiler"]
     if check_env_flag("TRITON_BUILD_DISTRIBUTED", "ON"):  # Default ON
         _packages += [
-            "nhTriton_dist",
-            "nhTriton_dist/_C",
-            "nhTriton_dist/benchmark",
-            "nhTriton_dist/kernels",
-            "nhTriton_dist/kernels/nvidia",
-            "nhTriton_dist/kernels/amd",
-            "nhTriton_dist/language",
-            "nhTriton_dist/language/extra",
-            "nhTriton_dist/layers",
-            "nhTriton_dist/layers/nvidia",
-            "nhTriton_dist/models",
-            "nhTriton_dist/test",
-            "nhTriton_dist/tools",
-            "nhTriton_dist/tools/compile",
-            "nhTriton_dist/tools/runtime",
+            "triton-dist",
+            "triton-dist/_C",
+            "triton-dist/benchmark",
+            "triton-dist/kernels",
+            "triton-dist/kernels/nvidia",
+            "triton-dist/kernels/amd",
+            "triton-dist/language",
+            "triton-dist/language/extra",
+            "triton-dist/layers",
+            "triton-dist/layers/nvidia",
+            "triton-dist/models",
+            "triton-dist/test",
+            "triton-dist/tools",
+            "triton-dist/tools/compile",
+            "triton-dist/tools/runtime",
         ]
 
     packages = []
@@ -969,7 +969,7 @@ DEPS = DEPS_NVIDIA + DEPS_HIP
 DEPS_TEST = ["nvidia-ml-py>=12.0"] if _is_cuda_platform() else []
 
 setup(
-    name=os.environ.get("TRITON_WHEEL_NAME", "nhTriton_dist"),
+    name=os.environ.get("TRITON_WHEEL_NAME", "triton-dist"),
     version="3.4.0" + get_git_version_suffix() + os.environ.get("TRITON_WHEEL_VERSION_SUFFIX", ""),
     author="ZhejiangLab NanHu Computation Framework",
     author_email="xuel@zhejianglab.org",

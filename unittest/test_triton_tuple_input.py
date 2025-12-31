@@ -29,8 +29,8 @@ import torch
 import random
 import itertools
 
-from nhTriton_dist.test.utils import assert_allclose
-from nhTriton_dist.profiler_utils import perf_func
+from triton_dist.test.utils import assert_allclose
+from triton_dist.profiler_utils import perf_func
 from triton.language.extra.cuda.language_extra import __syncthreads
 
 

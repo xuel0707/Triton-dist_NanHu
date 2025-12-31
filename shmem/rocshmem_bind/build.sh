@@ -36,7 +36,7 @@ function copy_rocshmem_bitcode() {
     if [ -n "$ROCSHMEM_HOME" ]; then
         local dst_path="$ROCSHMEM_HOME/lib"
     else
-        local dst_path="${PROJECT_ROOT}/../../python/nhTriton_dist/tools/compile"
+        local dst_path="${PROJECT_ROOT}/../../python/triton_dist/tools/compile"
     fi
     rocshmem_dir=${ROCSHMEM_DIR:-${PROJECT_ROOT}/rocshmem_build/install}
     lib_file=$rocshmem_dir/lib/librocshmem_device.bc
